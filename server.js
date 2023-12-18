@@ -59,7 +59,7 @@ app.post('/envia_emails.php', (req, res) => {
     if (error) {
       return res.status(500).send(error.toString());
     }
-    res.status(200).send('E-mail enviado: ' + info.response);
+    res.status(200).send(1);
   });
 });
 
