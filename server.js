@@ -29,9 +29,15 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+app.listen(port, () => {
+  console.log(`Servidor rodando em http://localhost:${port}`);
+});
+
 // Rota para enviar e-mails
 app.post('/envia_emails.php', (req, res) => {
-  const {     tipo_servico,
+  console.log(req.body)
+
+  const { tipo_servico,
     origem,
     nome,
     email,
@@ -42,9 +48,9 @@ app.post('/envia_emails.php', (req, res) => {
     email_unidade,
     nome_unidade, } = req.body;
 
-    console.log(req.body);
 
-    const mensagemEmail = `
+
+  const mensagemEmail = `
     Tipo de Serviço: ${tipo_servico}
     Origem: ${origem}
     Nome: ${nome}
@@ -65,12 +71,10 @@ app.post('/envia_emails.php', (req, res) => {
   // Enviar e-mail
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      return res.status(500).send(error.toString());
+      return res.sendStatus(500).send(error.toString());
     }
-    res.status(200).send(1);
+    res.send('1');
   });
 });
 
-app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
-});
+
