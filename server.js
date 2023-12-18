@@ -36,6 +36,8 @@ app.post('/envia_emails.php', (req, res) => {
     email_unidade,
     nome_unidade, } = req.body;
 
+    console.log(req.body);
+
     const mensagemEmail = `
     Tipo de Serviço: ${tipo_servico}
     Origem: ${origem}
